@@ -25,8 +25,16 @@
                 <td>@item.Genre.Name</td>
                 <td>@item.Rating</td>
                 <td>
-                    <a class="text-warning" asp-controller="Song" asp-action="Edit" asp-route-id="@item.SongId">Edit</a> |
-                    <a class="text-danger" asp-controller="Song" asp-action="Delete" asp-route-id="@item.SongId">Delete</a> 
+                    <a class="text-warning" 
+                       asp-controller="Song" 
+                       asp-action="Edit" 
+                       asp-route-id="@item.SongId"
+                       asp-route-slug="@item.Slug">Edit</a> |
+                    <a class="text-danger" 
+                       asp-controller="Song" 
+                       asp-action="Delete" 
+                       asp-route-id="@item.SongId"
+                       asp-route-slug="@item.Slug">Delete</a> 
                 </td>
             </tr>
         }
