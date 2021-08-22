@@ -10,8 +10,8 @@ using SongList.Models;
 namespace SongList.Migrations
 {
     [DbContext(typeof(SongContext))]
-    [Migration("20210822001436_Initial")]
-    partial class Initial
+    [Migration("20210822073822_AddingGenre")]
+    partial class AddingGenre
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,51 @@ namespace SongList.Migrations
                 .HasAnnotation("ProductVersion", "5.0.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("SongList.Models.Genre", b =>
+                {
+                    b.Property<string>("GenreId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GenreId");
+
+                    b.ToTable("Genre");
+
+                    b.HasData(
+                        new
+                        {
+                            GenreId = "R",
+                            Name = "Rap"
+                        },
+                        new
+                        {
+                            GenreId = "I",
+                            Name = "Indie"
+                        },
+                        new
+                        {
+                            GenreId = "H",
+                            Name = "Hip Hop"
+                        },
+                        new
+                        {
+                            GenreId = "K",
+                            Name = "Klasik"
+                        });
+                });
+
             modelBuilder.Entity("SongList.Models.Song", b =>
                 {
                     b.Property<int>("SongId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GenreId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -42,12 +81,15 @@ namespace SongList.Migrations
 
                     b.HasKey("SongId");
 
+                    b.HasIndex("GenreId");
+
                     b.ToTable("Songs");
 
                     b.HasData(
                         new
                         {
                             SongId = 1,
+                            GenreId = "R",
                             Name = "Assalamualaikum",
                             Rating = 5,
                             Year = 2018
@@ -55,6 +97,7 @@ namespace SongList.Migrations
                         new
                         {
                             SongId = 2,
+                            GenreId = "I",
                             Name = "Dewi Puspita",
                             Rating = 4,
                             Year = 2021
@@ -62,10 +105,30 @@ namespace SongList.Migrations
                         new
                         {
                             SongId = 3,
+                            GenreId = "K",
                             Name = "Nak Dara Rindu",
                             Rating = 3,
                             Year = 2021
+                        },
+                        new
+                        {
+                            SongId = 4,
+                            GenreId = "I",
+                            Name = "Pagi Yang Gelap",
+                            Rating = 4,
+                            Year = 2008
                         });
+                });
+
+            modelBuilder.Entity("SongList.Models.Song", b =>
+                {
+                    b.HasOne("SongList.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Genre");
                 });
 #pragma warning restore 612, 618
         }

@@ -24,17 +24,13 @@ namespace SongList.Migrations
             migrationBuilder.InsertData(
                 table: "Songs",
                 columns: new[] { "SongId", "Name", "Rating", "Year" },
-                values: new object[] { 1, "Assalamualaikum", 5, 2018 });
-
-            migrationBuilder.InsertData(
-                table: "Songs",
-                columns: new[] { "SongId", "Name", "Rating", "Year" },
-                values: new object[] { 2, "Dewi Puspita", 4, 2021 });
-
-            migrationBuilder.InsertData(
-                table: "Songs",
-                columns: new[] { "SongId", "Name", "Rating", "Year" },
-                values: new object[] { 3, "Nak Dara Rindu", 3, 2021 });
+                values: new object[,]
+                {
+                    { 1, "Assalamualaikum", 5, 2018 },
+                    { 2, "Dewi Puspita", 4, 2021 },
+                    { 3, "Nak Dara Rindu", 3, 2021 },
+                    { 4, "Pagi Yang Gelap", 4, 2008 }
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
