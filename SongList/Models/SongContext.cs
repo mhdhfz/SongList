@@ -14,6 +14,7 @@ namespace SongList.Models
         }
 
         public DbSet<Song> Songs { get; set; }
+        public DbSet<Genre> Genres { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

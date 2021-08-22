@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SongList.Models;
 using System;
@@ -19,7 +20,7 @@ namespace SongList.Controllers
         }
         public IActionResult Index()
         {
-            var songs = _db.Songs.OrderBy(m => m.Name).ToList();
+            var songs = _db.Songs.Include(g => g.Genre).OrderBy(m => m.Name).ToList();
             return View(songs);
         }
     }
