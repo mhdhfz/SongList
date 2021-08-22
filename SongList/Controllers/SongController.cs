@@ -20,6 +20,7 @@ namespace SongList.Controllers
         public IActionResult Create()
         {
             ViewBag.Action = "Create";
+            ViewBag.Genres = _db.Genres.OrderBy(g => g.Name).ToList();
             return View("Edit", new Song());
         }
 
@@ -28,6 +29,7 @@ namespace SongList.Controllers
         public IActionResult Edit(int id)
         {
             ViewBag.Action = "Edit";
+            ViewBag.Genres = _db.Genres.OrderBy(g => g.Name).ToList();
             var song = _db.Songs.Find(id);
             return View(song);
         }
@@ -53,6 +55,7 @@ namespace SongList.Controllers
             else
             {
                 ViewBag.Action = song.SongId == 0 ? "Create" : "Edit";
+                ViewBag.Genres = _db.Genres.OrderBy(g => g.Name).ToList();
                 return View(song);
             }
         }
