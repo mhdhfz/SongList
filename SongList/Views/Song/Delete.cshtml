@@ -1,0 +1,13 @@
+﻿@model Song
+@{ 
+    ViewBag.Title = "Delete Song";
+}
+
+<h2 class="mb-3">Confirm Deletion</h2>
+<h3>@Model.Name @Model.Year</h3>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="SongId" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" asp-controller="Home" asp-action="Index" >Cancel</a>
+</form>

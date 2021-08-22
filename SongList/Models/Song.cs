@@ -18,7 +18,7 @@ namespace SongList.Models
         public int? Year { get; set; }
 
         [Required(ErrorMessage = "Please enter the rating")]
-        [Range(1900, 2021, ErrorMessage = "Rating must between 1 and 5")]
+        [Range(1, 5, ErrorMessage = "Rating must between 1 and 5")]
         public int? Rating { get; set; }
 
 
